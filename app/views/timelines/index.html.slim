@@ -1,0 +1,120 @@
+= render 'layouts/header'
+
+.container.wrapper
+  .row
+    .col-md-8.offset-md-2
+      = form_with url: search_timelines_path, method: :get, class: 'search-work mb-3', local: true, skip_enforcing_utf8: true do |form|
+        = form.text_field :keyword, class: 'search-form form-control', placeholder: 'タイトルで探す', 'aria-label': '作品タイトルで探す'
+        = button_tag name: nil, class: 'btn'
+          = icon('fas', 'search')
+
+      .dropdown.text-center.sort.mb-3
+        = link_to '新着作品', '#', id: 'dropdownMenuLink', class: 'btn dropdown-toggle', data: { toggle: 'dropdown' }
+        / .dropdown-menu
+        /   = link_to '口コミの新しい順', '/', class: 'dropdown-item py-2'
+        /   = link_to '口コミの多い順', '/', class: 'dropdown-item py-2'
+        /   = link_to 'レビューの高い順', '/', class: 'dropdown-item py-2'
+          / = link_to 'おすすめ', '#', class: 'dropdown-item'
+
+
+      / p.text-right
+      /   = link_to '/' do
+      /     span.pr-2 タグから探す
+      /     = icon('fas fa-lg', 'chevron-circle-right')
+
+      / サンプルここから
+      / .card.mb-4.border-0
+      /   = image_tag 'noimage.png', class: 'card-img-top rounded-0 m-auto pt-4'
+
+      /   .card-body.px-3.py-4
+      /     h4.card-title.font-weight-bold.text-center 羅生門
+      /     p.card-text
+      /       span.no-summary まだあらすじが書かれていません。ぜひここからあなたが書いてみてください!!
+
+      /     .text-right.mb-3
+      /       = icon('far fa-lg', 'star', class: 'card-review')
+      /       span.pl-1.font-weight-bold 0
+
+      /     = link_to 'タグ編集', '/' ,class: 'card-link card-tag'
+      / サンプルここまで
+
+      - @works.each do |work|
+        .card.border-0.mb-2.p-2
+          .row.no-gutters.align-items-center
+            .col-4
+              - if work.image.present?
+                = image_tag work.image, class: 'card-img-top rounded-0'
+              - else
+                = image_tag 'noimage.png', class: 'card-img-top rounded-0'
+
+            .col-8
+              .card-body.p-2
+                h4.card-title.font-weight-bold.mb-2
+                  = work.title
+                .card-body__sub.d-flex.align-items-center.mb-2
+                  span.year.pr-3 = "#{work.year}年"
+                  = icon('fas fa-lg', 'eye', class: 'views pr-1')
+                  span 99
+                = link_to "https://www.netflix.com/title/#{work.link}", class: 'moveto-netflix-button d-block text-center font-weight-bold p-2' do
+                  span.pr-2 Netflixでみる
+                  = icon('fas fa-lg', 'angle-right', class: 'align-middle')
+
+
+
+
+            / - if work.summary.present?
+            /   p.card-text
+            /     = truncate(work.summary, length: 100) do
+            /       = link_to 'もっと見る', work_path(work)
+            / - else
+            /   p.card-text.text-center
+            /     = link_to work_path(work) do
+            /       span あらすじを書く
+
+
+            / レビュー星
+            / .text-right.mb-3
+            /   = icon('fas fa-lg', 'star', class: 'card-review')
+            /   = icon('fas fa-lg', 'star', class: 'card-review')
+            /   = icon('fas fa-lg', 'star', class: 'card-review')
+            /   = icon('fas fa-lg', 'star', class: 'card-review')
+            /   = icon('far fa-lg', 'star', class: 'card-review')
+            /   span.pl-1.font-weight-bold 4.0
+
+            / = link_to '#ヒューマンドラマ', '/' ,class: 'card-link card-tag'
+            / = link_to '#泣ける映画', '/' ,class: 'card-link card-tag'
+            / = link_to '#長いタイトルの映画', '/' ,class: 'card-link card-tag'
+            / = link_to '#海外ドラマ', '/' ,class: 'card-link card-tag'
+            / = link_to '#1980年代', '/' ,class: 'card-link card-tag'
+            / = link_to '#SF', '/' ,class: 'card-link card-tag'
+            / = link_to '#Netflixオリジナル', '/' ,class: 'card-link card-tag'
+            / = link_to 'タグ編集', '/' ,class: 'card-link card-tag'
+
+
+          / ul.list-group
+          /   - if work.search_reviews.present?
+          /     - work.search_reviews.first(3).each do |review|
+          /       li.list-group-item.rounded.mb-3.mx-2.review-list
+          /         div.d-flex.justify-content-between.align-items-center.review-list__user
+          /           div.name
+          /             = image_tag 'animal_inu.png', width: '40px', class: 'rounded-circle pr-2'
+          /             = review.user.name
+          /           / div
+          /           /   = icon('fas fa-lg', 'heart', class: '')
+          /           /   span.pl-1 10
+
+          /         div.font-weight-bold.review-list__content
+          /           span.title = review.title.truncate(30)
+          /         div
+          /           = review.body
+
+          /   - else
+          /     li.list-group-item.rounded.mb-3.mx-2 口コミはまだありません。投稿してみましょう！
+
+          / .card-footer.p-0.text-center
+          /   = link_to '口コミをもっとみる', work_path(work, anchor: 'review'), class: 'd-block font-weight-bold p-3'
+            / = link_to '口コミをもっとみる', new_review_path(work_id: work.id, user_id: current_user.id), class: 'font-weight-bold'
+
+      = paginate @works, window: 2
+
+= render 'layouts/footer'

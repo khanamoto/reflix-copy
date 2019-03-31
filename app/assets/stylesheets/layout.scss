@@ -1,0 +1,203 @@
+html {
+  font-size: 14px;
+}
+
+body {
+  background-color: #f4f7f6; // グレー系
+  background-color: #e5dede; // 薄い赤系
+  background-color: #c1c9d0; // 青系
+  background-color: #f9faf4; // やや明るいグレー系
+  background-color: #141414; // Netflix
+  // background-color: hsla(0,0%,7%,.5);
+  // background-color: #222;
+  // color: #202121;
+  color: rgba(255, 255, 255, .7);
+}
+
+.wrapper {
+  padding-top: 65px;
+  margin-bottom: 1.5rem;
+}
+
+.global-header {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  nav {
+    height: 50px;
+    .logo {
+      h1 {
+        font-size: 1rem;
+      }
+    }
+    .mypage-link {
+      color: rgba(32, 33, 33, 0.5); // 白背景のグレーテキスト
+      &::after {
+        display: none;
+      }
+    }
+    .user-image {
+      background-color: #f4f7f6;
+    }
+  }
+}
+
+.sort {
+  .dropdown-toggle {
+    color: rgba(255, 255, 255, .7);
+  }
+  .dropdown-menu {
+    background-color: #f4f7f6;
+    border: 0;
+    border-radius: 0;
+    text-align: center;
+    transform: translate3d(0, 34px, 0) !important;
+    width: 100%;
+  }
+}
+
+.global-footer {
+  .copyright {
+    font-size: 12px;
+  }
+}
+
+a {
+  color: #d65e5b;
+}
+
+// ログインボタンを白テキストにする（暫定）
+.actions input {
+  color: rgba(255, 255, 255, .7);
+}
+
+.card {
+  // background-color: #fcfcfc;
+  // background-color: #e5dede; // 薄い赤系
+  // background-color: transparent;
+  // background-color: #f9faf4; // やや明るいグレー系
+  // color: #fff;
+  // box-shadow: 0 3px 10px rgba(0,0,0,.15);
+  // border-color: #9bd3c7;
+  // border-color: #fcfcfc;
+  border-radius: 3px;
+  color: #202121;
+  &-body {
+    &__sub {
+      color: #9b9b9b;
+    }
+  }
+  .card-img-top {
+    // max-width: 200px;
+    height: 100px;
+    max-width: 100px;
+    width: 100%;
+    object-fit: contain;
+  }
+  .card-title {
+    font-size: 1.125rem;
+    a {
+      color: #202121;
+    }
+  }
+  .card-text {
+    // color: #666;
+  }
+  .card-tag {
+    font-size: .9rem;
+  }
+  .card-review {
+    color: #ffa724;
+  }
+  .card-favorite {
+    color: #d65e5b;
+  }
+  .review-list {
+    &__user {
+      border-bottom: 1px solid rgba(222, 222, 222, .4);
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      .name {
+        color: #222;
+        font-size: .75rem;
+        font-weight: bold;
+      }
+    }
+    &__content {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .title {
+      font-size: 1.1rem;
+    }
+    &__day {
+      color: #9b9b9b;
+    }
+  }
+  .review-button {
+    background-color: #808080;
+    color: #fff;
+  }
+  .moveto-netflix-button {
+    background-color: #e50914;
+    border-radius: 3px;
+    color: #fff;
+  }
+}
+
+.search-work {
+  position: relative;
+  .search-form {
+    background-color: #f4f7f6;
+    border-radius: 3px;
+    border: 0;
+    height: 40px;
+    font-size: 1.14rem;
+    padding-right: 40px;
+  }
+  button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.pagination {
+  justify-content: center;
+  .page-item {
+    &.active .page-link {
+      background-color: #808080;
+      border-color: #808080;
+      color: #fff;
+    }
+    .page-link {
+      color: #d65e5b;
+    }
+  }
+}
+
+.lower-title {
+  font-size: 1.14rem;
+  font-weight: 700;
+  padding: .5rem 1rem .3rem;
+}
+.mylist {
+  &-item {
+    background-color: #fff;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: -1px;
+    a {
+      color: #202121;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      i {
+        color: rgba(32, 33, 33, 0.4);
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+= render 'layouts/header'
+
+section.wrapper
+  h2.lower-title マイページ
+  ul.mylist.list-group
+    li.mylist-item
+      = link_to '/' do
+        span 登録情報
+        = icon('fas', 'chevron-right')
+    li.mylist-item
+      = link_to '/' do
+        span お知らせ
+        = icon('fas', 'chevron-right')
+    li.mylist-item
+      = link_to '/' do
+        span お問い合わせ
+        = icon('fas', 'chevron-right')
+    li.mylist-item
+      = link_to privacy_path do
+        span プライバシーポリシー
+        = icon('fas', 'chevron-right')
+    li.mylist-item
+      = link_to terms_path do
+        span 利用規約
+        = icon('fas', 'chevron-right')
+    li.mylist-item
+      = link_to destroy_user_session_path, method: :delete do
+        span ログアウト
+        = icon('fas', 'chevron-right')
+
+= render 'layouts/footer'

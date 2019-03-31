@@ -1,0 +1,21 @@
+header.global-header
+  nav.navbar.navbar-light.bg-white.align-items-center
+    = link_to root_path, class: 'logo navbar-brand'
+      h1.m-0
+        = image_tag 'logo.png', height: '25', alt: 'レフリックス'
+    .dropdown
+      = link_to '#', id: 'dropdownMenuLink', class: 'dropdown-toggle mypage-link', role: 'button', data: { toggle: 'dropdown' }
+        = icon('fas fa-2x', 'user-circle')
+        .dropdown-menu.dropdown-menu-right
+          = link_to 'お問い合わせ', 'https://docs.google.com/forms/d/e/1FAIpQLSdaPQrgpJNn2fweWzUKEaTtAYjMKeRHvrz5_dLmnH8hWDLY6A/viewform?usp=sf_link', class: 'dropdown-item', target: '_blank'
+
+    /     - if user_signed_in?
+    /       = image_tag 'animal_inu.png', width: '35px', class: 'user-image rounded-circle'
+    /     - else
+    /       = icon('fas fa-2x', 'user-circle')
+    /   .dropdown-menu.dropdown-menu-right
+    /     - if user_signed_in?
+    /       = link_to 'マイページ', mypage_index_path, class: 'dropdown-item'
+    /     - else
+    /       = link_to 'ログイン', new_user_session_path, class: 'dropdown-item'
+          / = link_to '新規登録', new_user_registration_path, class: 'dropdown-item'

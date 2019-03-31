@@ -1,0 +1,103 @@
+= render 'layouts/header'
+
+.container.wrapper
+  .row
+    .col-md-8.offset-md-2
+      .card.mb-4.border-0
+        - if @work.image.present?
+          = image_tag @work.image, class: 'card-img-top rounded-0 m-auto pt-4'
+        - else
+          = image_tag 'noimage.png', class: 'card-img-top rounded-0 m-auto pt-4'
+
+        .card-body.px-3.pt-4.pb-0
+          h4.card-title.font-weight-bold.text-center
+            = @work.title
+          p.card-text
+            - if @work.summary.present?
+              = simple_format(@work.summary)
+            - else
+              div.text-center = link_to 'あらすじを書く', '/'
+
+          / .text-right.mb-3
+          /   = icon('fas fa-lg', 'star', class: 'card-review')
+          /   = icon('fas fa-lg', 'star', class: 'card-review')
+          /   = icon('fas fa-lg', 'star', class: 'card-review')
+          /   = icon('fas fa-lg', 'star', class: 'card-review')
+          /   = icon('far fa-lg', 'star', class: 'card-review')
+          /   span.pl-1.font-weight-bold 4.0
+
+          / = link_to '#ヒューマンドラマ', '/' ,class: 'card-link card-tag'
+          / = link_to '#泣ける映画', '/' ,class: 'card-link card-tag'
+          / = link_to '#長いタイトルの映画', '/' ,class: 'card-link card-tag'
+          / = link_to '#海外ドラマ', '/' ,class: 'card-link card-tag'
+          / = link_to '#1980年代', '/' ,class: 'card-link card-tag'
+          / = link_to '#SF', '/' ,class: 'card-link card-tag'
+          / = link_to '#Netflixオリジナル', '/' ,class: 'card-link card-tag'
+          / = link_to 'タグ編集', '/' ,class: 'card-link card-tag'
+
+        ul.list-group.pt-4#review
+          - if @work.search_reviews.present?
+            p.mx-2
+              span.font-weight-bold = @work.title
+              small の口コミ
+            - @work.search_reviews.first(3).each do |review|
+              li.list-group-item.rounded.review-list.mb-3.mx-2
+                div.d-flex.justify-content-between.align-items-center.review-list__user
+                  div.name
+                    = image_tag 'animal_inu.png', width: '40px', class: 'rounded-circle pr-2'
+                    = review.user.name
+                  / div
+                  /   = icon('far fa-lg', 'heart', class: '')
+                  /   span.pl-1 10
+
+                / .text-right.mb-2
+                /   = icon('fas fa-lg', 'star', class: 'card-review')
+                /   = icon('fas fa-lg', 'star', class: 'card-review')
+                /   = icon('fas fa-lg', 'star', class: 'card-review')
+                /   = icon('fas fa-lg', 'star', class: 'card-review')
+                /   = icon('far fa-lg', 'star', class: 'card-review')
+                /   span.pl-1.font-weight-bold 4.0
+
+                div.font-weight-bold.mb-2
+                  span.title = review.title
+                div
+                  = review.body
+                div.text-right.review-list__day
+                  small= review.created_at.strftime('%Y/%m/%d')
+
+              / サンプルここから
+              / li.list-group-item.rounded.review-list.mb-3.mx-2
+              /   div.d-flex.justify-content-between.align-items-center.review-list__user
+              /     div.name
+              /       = image_tag 'animal_neko.png', width: '40px', class: 'rounded-circle'
+              /       | サンプルユーザー
+              /     div
+              /       = icon('fas fa-lg', 'heart', class: 'card-favorite')
+              /       span.pl-1 20
+
+              /   .text-right.mb-2
+              /     = icon('fas fa-lg', 'star', class: 'card-review')
+              /     = icon('fas fa-lg', 'star', class: 'card-review')
+              /     = icon('fas fa-lg', 'star', class: 'card-review')
+              /     = icon('far fa-lg', 'star', class: 'card-review')
+              /     = icon('far fa-lg', 'star', class: 'card-review')
+              /     span.pl-1.font-weight-bold 3.0
+
+              /   div.font-weight-bold.mb-2
+              /     span.title SF映画の金字塔
+              /   div まさに宇宙
+              / サンプルここまで
+
+            p.text-center.font-weight-bold.py-3
+              = link_to 'もっとみる', '/'
+
+          - else
+            li.list-group-item.rounded.review-list.mb-3.mx-2.py-4 口コミはまだありません。投稿してみましょう！
+
+        - if current_user.present?
+          .text-center
+            / ああああ
+            = link_to '口コミを書く', new_review_path(work_id: @work.id, user_id: current_user.id), class: 'review-button d-block font-weight-bold p-3'
+            = link_to 'Netflixでみる', "https://www.netflix.com/title/#{@work.link}", class: 'moveto-netflix-button d-block font-weight-bold p-3'
+
+= render 'layouts/footer'

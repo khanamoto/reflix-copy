@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta name='viewport' content='width=devise-width,initial-scale=1'
+    title Netflixの作品検索ならレフリックス
+    meta name='description' content='レフリックスは、Netflixの作品をジャンル別などで検索できるサービスです。Netflixにはどんな作品があるのかログイン不要で見ることができます。'
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    = yield

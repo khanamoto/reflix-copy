@@ -1,0 +1,31 @@
+= render 'layouts/header'
+
+.container.wrapper
+  .row
+    .col
+      = form_with model: @work, local: true do |form|
+        .form-group
+          = form.label :title, 'タイトル', class: 'col-md-3 col-form-label'
+          = form.text_field :title, class: 'form-control', required: true
+
+          = form.label :summary, 'あらすじ', class: 'col-md-3 col-form-label'
+          = form.text_area :summary, class: 'form-control'
+
+          = form.label :year, '公開年', class: 'col-md-3 col-form-label'
+          = form.text_field :year, class: 'form-control', required: true
+
+          = form.label :runtime, '上映時間', class: 'col-md-3 col-form-label'
+          = form.text_field :runtime, class: 'form-control'
+
+          = form.label :country, '製作国', class: 'col-md-3 col-form-label'
+          = form.text_field :country, class: 'form-control'
+
+          = form.label :type, 'カテゴリー', class: 'col-md-3 col-form-label'
+          = form.text_field :type, class: 'form-control'
+
+          = form.hidden_field :image, value: :image
+
+        div = button_tag '登録する', class: 'btn btn-primary mb-5'
+        div = link_to 'もどる', root_path, class: 'btn btn-primary'
+
+= render 'layouts/footer'
